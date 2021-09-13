@@ -1,0 +1,7 @@
+{
+  "name": "pv911_node_react.git",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
