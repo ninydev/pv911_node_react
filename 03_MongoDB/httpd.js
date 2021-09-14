@@ -10,6 +10,11 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json());
 
+// Подключим маршруты
+const router = require("./routes");
+app.use(router);
+
+
 // Настройка соединения с базой
 const mongoUri = "mongodb+srv://pv911User:QweAsdZxc!23@nodecluster.a9rlr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const mongoose = require("mongoose");

@@ -1,5 +1,4 @@
-//TODO: покдлючить нужную модель
-const model = require("../models/template");
+const model = require("../models/slider");
 
 // Create => POST
 exports.post = function (req, res) {
