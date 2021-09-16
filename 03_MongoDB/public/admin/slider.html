@@ -2,28 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Управление слайдером</title>
 </head>
 <body>
 <main id="main">
-
 </main>
 
-<form id="newSlider">
-    <input type="text" name="name"><br>
-    <input type="text" name="Msg1"><br>
-    <input type="text" name="Msg2"><br>
-    <input type="text" name="Msg3"><br>
-    <input type="text" name="Msg4"><br>
-    <input type="text" name="url"><br>
-    <input type="text" name="imgUrl">
-    <input type="text" name="linkText">
+<form name="newSlider">
+    <input type="text" name="name" value="Slider name"><br>
+    <input type="text" name="Msg1" value="1"><br>
+    <input type="text" name="Msg2" value="2"><br>
+    <input type="text" name="Msg3" value="3"><br>
+    <input type="text" name="Msg4" value="4"><br>
+    <input type="text" name="url" value="http://localhost"><br>
+    <input type="text" name="imgUrl" value=""><br>
+    <input type="text" name="linkText" value="read More"><br>
     <input type="button" id="btnSend">
 </form>
 
 <script>
+    function buildList(elements) {
+        console.log(elements);
+        //let elements = json;//.parse();
+        let main = document.getElementById("main");
+        main.innerHTML = "";
+        let ul = document.createElement("ul");
+        for (let i = 0; i < elements.length; i++) {
+            let li = document.createElement("li");
+            li.innerText = elements[i].name;
+            li.id = elements[i]._id;
+            ul.appendChild(li);
+        }
+        main.appendChild(ul);
+    }
+
+    function loadSliders() {
+        fetch("/api/slider")
+            .then(res => res.json())
+            .then(json => buildList(json))
+            .catch(err => {if (err) console.log(err);});
+    }
+    loadSliders();
+
 
     document.getElementById("btnSend").onclick = function () {
+        let form = document.forms.newSlider;
+        let slide = {};
+        for (let i = 0; i < form.elements.length; i++) {
+            slide[form.elements[i].name] = form.elements[i].value;
+        }
+        console.log (slide);
+
+        fetch(
+            "/api/slider",
+            {
+                method: "post",
+                body: JSON.stringify(slide),
+                headers: { 'Content-Type': 'application/json' }
+            }
+        )
+        .then(res => {console.log(res)})
+        .catch(err => {if (err) console.log(err);});
         // const Slider = new URLSearchParams(new FormData(document.getElementById("newSlider")));
     }
 

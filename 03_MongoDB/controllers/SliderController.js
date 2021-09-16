@@ -4,6 +4,7 @@ const model = require("../models/slider");
 exports.post = function (req, res) {
     console.log ("POST start");
     const element = new model (req.body);
+    console.log(req.body);
     element.save (function (err) {
         if(err) { console.log(err); return err;}
         return res.sendStatus(201);
