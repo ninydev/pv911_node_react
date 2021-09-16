@@ -24,6 +24,7 @@ exports.get = function (req, res) {
 
 // Update => PUT
 exports.put = function (req, res) {
+    // model.findByIdAndUpdate();
 }
 
 // Delete = >DELETE

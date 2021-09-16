@@ -33,7 +33,7 @@
             .then(res => {
                 if(res.status === 200) {
                     console.log (SliderList.findIndex(s=> s._id == this.className));
-                    SliderList.splice(SliderList.findIndex(s=> s._id == this.className));
+                    SliderList.splice(SliderList.findIndex(s=> s._id == this.className), 1);
                     buildList();
                 } else {
                     console.log (res);
@@ -45,8 +45,7 @@
 
 
     function buildList() {
-        console.log(SliderList);
-        //let elements = json;//.parse();
+        // console.log(SliderList);
         let main = document.getElementById("main");
         main.innerHTML = "";
         let ul = document.createElement("ul");
