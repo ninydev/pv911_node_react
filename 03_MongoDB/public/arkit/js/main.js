@@ -37,37 +37,90 @@
 =========================================================================*/ 
     $(document).ready(function () {
 
-        $('#main-slider').on('init', function(e, slick) {
-            var $firstAnimatingElements = $('div.single-slide:first-child').find('[data-animation]');
-            doAnimations($firstAnimatingElements);    
-        });
-        $('#main-slider').on('beforeChange', function(e, slick, currentSlide, nextSlide) {
-                  var $animatingElements = $('div.single-slide[data-slick-index="' + nextSlide + '"]').find('[data-animation]');
-                  doAnimations($animatingElements);    
-        });
-        $('#main-slider').slick({
-           autoplay: true,
-           autoplaySpeed: 10000,
-           dots: true,
-           fade: true,
-           prevArrow: '<div class="slick-prev"><i class="fa fa-chevron-left"></i></div>',
-                nextArrow: '<div class="slick-next"><i class="fa fa-chevron-right"></i></div>'
-        });
-        function doAnimations(elements) {
-            var animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-            elements.each(function() {
-                var $this = $(this);
-                var $animationDelay = $this.data('delay');
-                var $animationType = 'animated ' + $this.data('animation');
-                $this.css({
-                    'animation-delay': $animationDelay,
-                    '-webkit-animation-delay': $animationDelay
+        fetch("/api/slider")
+            .then(res => res.json())
+            .then(json => {
+                let main = document.getElementById("main-slider");
+                main.innerHTML = "";
+                for(let i = 0; i < json.length; i++) {
+                    let div = document.createElement("div");
+                    div.className = "single-slide";
+                    div.innerHTML = `\
+                <div class="bg-img kenburns-top-right" style="background-image: url();"></div>\
+            <div class="overlay"></div>\
+            <div class="slider-content-wrap d-flex align-items-center text-left">\
+                <div class="container">\
+                    <div class="slider-content">\
+                        <div class="dl-caption medium">\
+                            <div class="inner-layer">\
+                                <div data-animation="fade-in-right" data-delay="1s">${json[i].Msg1}</div>\
+                            </div>\
+                        </div>\
+                        <div class="dl-caption dl-border" data-animation="fade-in-left" data-delay="0s"></div>\
+                        <div class="dl-caption big">\
+                            <div class="inner-layer">\
+                                <div data-animation="fade-in-left" data-delay="2s">${json[i].Msg2}</div>\
+                            </div>\
+                        </div>\
+                        <div class="dl-caption big">\
+                            <div class="inner-layer">\
+                                <div data-animation="fade-in-left" data-delay="2.5s">${json[i].Msg3}</div>\
+                            </div>\
+                        </div>\
+                        <div class="dl-caption small">\
+                            <div class="inner-layer">\
+                                <div data-animation="fade-in-left" data-delay="3s">${json[i].Msg4}\
+                                </div>\
+                            </div>\
+                        </div>\
+                        <div class="dl-btn-group">\
+                            <div class="inner-layer">\
+                                <a href="#" class="dl-btn" data-animation="fade-in-left" data-delay="3.5s"> ${json[i].linkText} <i class="arrow_right"></i></a>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </div>\
+            </div>\ `;
+                    main.appendChild(div);
+                }
+
+                $('#main-slider').on('init', function(e, slick) {
+                    var $firstAnimatingElements = $('div.single-slide:first-child').find('[data-animation]');
+                    doAnimations($firstAnimatingElements);
                 });
-                $this.addClass($animationType).one(animationEndEvents, function() {
-                    $this.removeClass($animationType);
+                $('#main-slider').on('beforeChange', function(e, slick, currentSlide, nextSlide) {
+                    var $animatingElements = $('div.single-slide[data-slick-index="' + nextSlide + '"]').find('[data-animation]');
+                    doAnimations($animatingElements);
                 });
-            });
-        }
+                $('#main-slider').slick({
+                    autoplay: true,
+                    autoplaySpeed: 10000,
+                    dots: true,
+                    fade: true,
+                    prevArrow: '<div class="slick-prev"><i class="fa fa-chevron-left"></i></div>',
+                    nextArrow: '<div class="slick-next"><i class="fa fa-chevron-right"></i></div>'
+                });
+                function doAnimations(elements) {
+                    var animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+                    elements.each(function() {
+                        var $this = $(this);
+                        var $animationDelay = $this.data('delay');
+                        var $animationType = 'animated ' + $this.data('animation');
+                        $this.css({
+                            'animation-delay': $animationDelay,
+                            '-webkit-animation-delay': $animationDelay
+                        });
+                        $this.addClass($animationType).one(animationEndEvents, function() {
+                            $this.removeClass($animationType);
+                        });
+                    });
+                }
+
+            })
+            .catch(err => {if (err) console.log(err);});
+
+
+
     });
 
 /*=========================================================================

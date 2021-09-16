@@ -24,7 +24,17 @@ exports.get = function (req, res) {
 
 // Update => PUT
 exports.put = function (req, res) {
-    // model.findByIdAndUpdate();
+    console.log ("PUT start");
+    const element = new model (req.body);
+    model.findByIdAndUpdate(
+        req.body._id,
+        element,
+        {},
+        function (err, result) {
+            if (err) {console.log(err); res.send(result);}
+            res.send(result);
+        }
+    );
 }
 
 // Delete = >DELETE
@@ -38,5 +48,4 @@ exports.delete = function (req, res) {
             res.sendStatus(200);
         }
     );
-
 }
