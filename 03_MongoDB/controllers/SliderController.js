@@ -7,7 +7,8 @@ exports.post = function (req, res) {
     console.log(req.body);
     element.save (function (err) {
         if(err) { console.log(err); return err;}
-        return res.sendStatus(201);
+        return res.json(element);
+        //return res.sendStatus(201);
     })
 };
 

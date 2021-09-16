@@ -21,7 +21,11 @@
 </form>
 
 <script>
-    function buildList(elements) {
+
+    let elements = [];
+
+
+    function buildList() {
         console.log(elements);
         //let elements = json;//.parse();
         let main = document.getElementById("main");
@@ -39,7 +43,7 @@
     function loadSliders() {
         fetch("/api/slider")
             .then(res => res.json())
-            .then(json => buildList(json))
+            .then(json => {elements = json; buildList();})
             .catch(err => {if (err) console.log(err);});
     }
     loadSliders();
@@ -53,17 +57,14 @@
         }
         console.log (slide);
 
-        fetch(
-            "/api/slider",
-            {
+        fetch( "/api/slider", {
                 method: "post",
                 body: JSON.stringify(slide),
                 headers: { 'Content-Type': 'application/json' }
-            }
-        )
-        .then(res => {console.log(res)})
-        .catch(err => {if (err) console.log(err);});
-        // const Slider = new URLSearchParams(new FormData(document.getElementById("newSlider")));
+            })
+            .then(res => res.json())
+            .then(json => {elements.push(json);buildList();})
+            .catch(err => {if (err) console.log(err);});
     }
 
 </script>
