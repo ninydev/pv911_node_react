@@ -22,19 +22,46 @@
 
 <script>
 
-    let elements = [];
+    let SliderList = [];
+
+    function sendDel() {
+        fetch( "/api/slider", {
+            method: "delete",
+            body: JSON.stringify({_id : this.className}),
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(res => {
+                if(res.status === 200) {
+                    console.log (SliderList.findIndex(s=> s._id == this.className));
+                    SliderList.splice(SliderList.findIndex(s=> s._id == this.className));
+                    buildList();
+                } else {
+                    console.log (res);
+                }
+            })
+            //.then(json => {SliderList.push(json);buildList();})
+            .catch(err => {if (err) console.log(err);});
+    }
 
 
     function buildList() {
-        console.log(elements);
+        console.log(SliderList);
         //let elements = json;//.parse();
         let main = document.getElementById("main");
         main.innerHTML = "";
         let ul = document.createElement("ul");
-        for (let i = 0; i < elements.length; i++) {
+        for (let i = 0; i < SliderList.length; i++) {
             let li = document.createElement("li");
-            li.innerText = elements[i].name;
-            li.id = elements[i]._id;
+            li.innerText = SliderList[i].name;
+            li.id = SliderList[i]._id;
+
+            let del = document.createElement("button");
+            del.type = "button";
+            del.className = SliderList[i]._id;
+            del.onclick = sendDel;
+
+            li.appendChild(del);
+
             ul.appendChild(li);
         }
         main.appendChild(ul);
@@ -43,7 +70,7 @@
     function loadSliders() {
         fetch("/api/slider")
             .then(res => res.json())
-            .then(json => {elements = json; buildList();})
+            .then(json => {SliderList = json; buildList();})
             .catch(err => {if (err) console.log(err);});
     }
     loadSliders();
@@ -63,7 +90,7 @@
                 headers: { 'Content-Type': 'application/json' }
             })
             .then(res => res.json())
-            .then(json => {elements.push(json);buildList();})
+            .then(json => {SliderList.push(json);buildList();})
             .catch(err => {if (err) console.log(err);});
     }
 
