@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname,"public")));
 const multer = require("multer");
 app.use(multer(
     {dest: path.join(__dirname,"public/uploads")})
-    .single("imgFiles"));
+    .single("fileData"));
 
 
 // Настроим модуль для разборки запросов

@@ -7,19 +7,27 @@
 <body>
 
 <main id="main">
-
 </main>
 
-<form action="/api/media" method="post" enctype="multipart/form-data">
-    <input type="file" name="imgFiles">
-    <input type="submit" value="send">
-</form>
+<section id="frm">
+    <form name="frmPost">
+        <input type="text" name="name">
+        <button type="button" id="SavePost" value="Save Post"></button>
+        <div id="divImages">
+
+        </div>
+    </form>
+</section>
+
+<section id="frmFiles">
+    <input type="file" id="fileData" name="fileData">
+    <input type="button" id="btnAttach" value="Attach File">
+</section>
 
 
 <script>
     // Главный элемент
     let main = document.getElementById("main");
-    // let apiUrl = "/api/post";
 
 
 
