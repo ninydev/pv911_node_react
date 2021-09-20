@@ -15,7 +15,7 @@
 <section id="frm">
     <form name="frmPost">
         <input type="text" name="name">
-        <button type="button" id="SavePost" value="Save Post"></button>
+        <button type="button" id="SavePost" value="">Save Post</button>
         <ul id="divImages">
 
         </ul>
@@ -48,7 +48,7 @@
                 let input = document.createElement("input");
                 input.value = imgUrl;
                 input.name = "imgUrls[]";
-                input.disable = true;
+                input.disabled = true;
                 let li = document.createElement("li");
                 li.appendChild(img);
                 li.appendChild(input);
