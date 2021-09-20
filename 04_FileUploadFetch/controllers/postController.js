@@ -4,11 +4,15 @@ const model = require("../models/post");
 // Create => POST
 exports.post = function (req, res) {
     console.log ("POST start");
-    const element = new model (req.body);
+    console.log(req.body);
+    //const element = new model (req.body);
+    /*
     element.save (function (err) {
         if(err) { console.log(err); return err;}
         return res.sendStatus(201);
     })
+
+     */
 };
 
 // Read => GET
