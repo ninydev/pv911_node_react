@@ -10,9 +10,8 @@
 
 </main>
 
-<form action="/api/post" method="post" enctype="multipart/form-data">
-    <input type="text" name="name">
-    <input type="file" name="imgFiles" multiple>
+<form action="/api/media" method="post" enctype="multipart/form-data">
+    <input type="file" name="imgFiles">
     <input type="submit" value="send">
 </form>
 
@@ -20,7 +19,8 @@
 <script>
     // Главный элемент
     let main = document.getElementById("main");
-    let apiUrl = "/api/post";
+    // let apiUrl = "/api/post";
+
 
 
 

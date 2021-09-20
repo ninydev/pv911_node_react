@@ -5,6 +5,13 @@ const app = express();
 // Установить каталог для статических файлов
 app.use(express.static(path.join(__dirname,"public")));
 
+// Установить загрузку файлов
+const multer = require("multer");
+app.use(multer(
+    {dest: path.join(__dirname,"public/uploads")})
+    .single("imgFiles"));
+
+
 // Настроим модуль для разборки запросов
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: true}));

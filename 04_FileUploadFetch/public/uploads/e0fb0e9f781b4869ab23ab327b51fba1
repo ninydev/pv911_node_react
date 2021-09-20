@@ -1,0 +1,14 @@
+ 
+ <style>
+ .ico { width: 98px; height: 92px; overflow: hidden; background-repeat: no-repeat; background-image: url('coq2.jpg'); }
+ .file {background-position: -98px 0px;}
+ .img {background-position: -98px -98px;}
+ </style>
+ 
+ <body>
+ 
+ <div class="ico file"></div>
+ <div class="ico img"></div>
+ <img src="coq2.jpg"/>
+ 
+ </body>

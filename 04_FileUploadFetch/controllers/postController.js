@@ -2,9 +2,15 @@
 const model = require("../models/post");
 
 // Create => POST
-exports.post = function (req, res) {
+exports.post = function (req, res, next) {
     console.log ("POST start");
-    console.log(req.body);
+    // console.log(req.body); // multipart/form-data - не работает
+
+    let fileData = req.file;
+    console.log(fileData);
+
+    let tmp_path = req.file.path;
+    console.log(tmp_path);
     //const element = new model (req.body);
     /*
     element.save (function (err) {
