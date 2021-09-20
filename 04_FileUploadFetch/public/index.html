@@ -26,6 +26,23 @@
 
 
 <script>
+    // Процесс отсылки изображения:
+    function sendImg() {
+        let formData = new FormData(); // Объект для отправки файла
+        formData.append("fileData", document.getElementById("fileData").file); // файл
+
+        fetch('/api/media',
+            {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {console.log(response); return response.text();})
+            .then(imgUrl => {console.log(imgUrl);})
+            .catch(err => console.log(err));
+    }
+
+    document.getElementById("btnAttach").onclick = sendImg;
+
     // Главный элемент
     let main = document.getElementById("main");
 

@@ -17,6 +17,8 @@ exports.post = function (req, res) {
     console.log(ext.extension(fileData.mimetype));
      */
 
+    console.log(req.file);
+
     let fileUrl ="/uploads/"+ req.file.filename + "." + ext.extension(req.file.mimetype);
     fs.rename(
         req.file.path,
