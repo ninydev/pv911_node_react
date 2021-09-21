@@ -22,6 +22,8 @@ class Reactive extends React.Component{
         return (
           <div>
               <h1>Hello Component</h1>
+              <CheckInput/>
+              <Counter startCount="5"></Counter>
               <ul>
                   {
                       // this.state - динамическое хранилище данных
@@ -38,6 +40,7 @@ class Reactive extends React.Component{
                   // bing(this) - подвязка метода к себе (к компоненту)
               }
               <button onClick={this.add.bind(this)}> add </button>
+
           </div>
         );
     }
