@@ -20,9 +20,13 @@
 <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin></script>
 
+<!-- Подключу компоненты -->
+<script src="/components/reactive.jsx" type="text/babel"></script>
+
+
 <script type="text/babel">
     ReactDOM.render(
-        <h1> Hello World</h1>,
+        <Reactive />,
         document.getElementById("app")
     )
 </script>
