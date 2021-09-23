@@ -12,15 +12,23 @@ class Children extends React.Component {
 
     componentDidMount() {
         console.log("Children - componentDidMount")
-
-    }
     }
 
-    render(){
-    console.log("Children - render")
-    return (
+    componentWillUnmount() {
+        console.log("Children - componentWillUnmount")
+    }
+
+    componentDidUpdate(){
+        console.log("Children - componentDidUpdate")
+    }
+
+    render() {
+        console.log("Children - render")
+        return (
             <div>
-
+                <h2> Children: {this.props.someVar} </h2>
             </div>
         )
+    }
+
 }

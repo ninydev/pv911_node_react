@@ -2,7 +2,6 @@ class Parent extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log("Parent - constructor")
         this.state = {
             isLoaded: false,
             error: null,
@@ -10,17 +9,17 @@ class Parent extends React.Component {
         };
     }
 
+    onChange (element){
+        this.state[element.target.name] = element.target.value;
+    }
+
     componentDidMount() {
-        console.log("Parent - componentDidMount")
     }
 
     render(){
-        console.log("Parent - render")
-
-        return (
-            <div>
-            </div>
-        )
+        if(this.state.error) return this.renderError(); // Если ошибка - вывожу ее
+        if(!this.state.isLoaded) return this.renderLoading(); // Загружаюсь
+        return this.renderData();
     }
 
     // Вывод основного состояния компонента
@@ -52,6 +51,5 @@ class Parent extends React.Component {
             </div>
         );
     }
-
 
 }
