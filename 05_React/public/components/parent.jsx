@@ -49,7 +49,10 @@ class Parent extends React.Component {
                     <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Show Children</label>
                 </div>
                 {this.state.isShowChildren &&
-                    <Children someVar={"Children Name"}></Children>
+                    <Children
+                        actionChange = {this.toggleShowChildren.bind(this)}
+                        isShowChildren={this.state.isShowChildren}
+                        someVar={"Children Name"}></Children>
                 }
                 {this.state.isShowChildren ? " Показать " : "Спрятать" }
             </div>
@@ -87,7 +90,6 @@ class Parent extends React.Component {
         )
     }
 
-
     // Простой рендер
     render_simple(){
         console.log("Parent - render")
@@ -106,7 +108,6 @@ class Parent extends React.Component {
             </div>
         )
     }
-
 
     // Вывод основного состояния компонента
     renderData(){
