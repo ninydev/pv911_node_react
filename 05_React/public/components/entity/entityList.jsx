@@ -14,6 +14,18 @@ class EntityList extends React.Component {
     }
 
     componentDidMount() {
+        console.log("Start get data:");
+        fetch("/api/entities")
+            .then(response => response.json())
+            .then(data => {
+                console.log("getData:");
+                console.log(data);
+                this.setState({
+                    isLoaded: true,
+                    items: data
+                });
+            })
+            .catch(err=> {this.setState ({error: err})});
     }
 
     render(){
@@ -24,10 +36,16 @@ class EntityList extends React.Component {
 
     // Вывод основного состояния компонента
     renderData(){
-        let key = 1;
         return (
-            <div>
-
+            <div className="container">
+                <div className="row">
+                    {
+                        this.state.items.map( entity =>
+                            <EntityItem item={entity}></EntityItem>
+                        )
+                    }
+                    <EntityItem key={"newElement"} item={null}></EntityItem>
+                </div>
             </div>
         );
     }

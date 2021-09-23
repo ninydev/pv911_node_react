@@ -1,11 +1,12 @@
-class EntityList extends React.Component {
+class EntityItem extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            isLoaded: false,
+            isLoaded: true,
+            isEdit: false,
             error: null,
-            items: []
+            item: props.item
         };
     }
 
@@ -18,19 +19,42 @@ class EntityList extends React.Component {
 
     render(){
         if(this.state.error) return this.renderError(); // Если ошибка - вывожу ее
-        if(!this.state.isLoaded) return this.renderLoading(); // Загружаюсь
+        // if(!this.state.isLoaded) return this.renderLoading(); // Загружаюсь
+        if(this.state.item == null) return this.renderNewElement();
         return this.renderData();
+    }
+
+    renderForm(){
+        <div className="card col-3" key="CreateNewElement">
+            <div className="card-body">
+                Создать
+            </div>
+        </div>
+    }
+
+    // Предложить созать форму
+    renderNewElement(){
+        return (
+            <div className="card col-3" key="CreateNewElement">
+                <div className="card-body">
+                    Создать
+                </div>
+            </div>
+        );
     }
 
     // Вывод основного состояния компонента
     renderData(){
-        let key = 1;
         return (
-            <div>
-
+            <div className="card col-3" key={this.state.item._id}>
+                <div className="card-body">
+                    {this.state.item.name}
+                </div>
             </div>
         );
     }
+
+
 
     // Компонент в состоянии загрузки
     renderLoading(){
