@@ -4,6 +4,9 @@ const app = express();
 
 // Установить каталог для статических файлов
 app.use(express.static(path.join(__dirname,"public")));
+// Установить каталог для хранения файлов
+app.use("storage", path.join(__dirname,"public/storage"));
+
 
 // Установить загрузку файлов
 const multer = require("multer");

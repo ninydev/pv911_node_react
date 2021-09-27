@@ -1,5 +1,9 @@
 //TODO: покдлючить нужную модель
 const model = require("../models/post");
+const express = require("express");
+const path = require("path");
+const app = express();
+
 
 // Create => POST
 exports.post = function (req, res, next) {
@@ -23,7 +27,9 @@ exports.post = function (req, res, next) {
 
 // Read => GET
 exports.get = function (req, res) {
-    console.log ("GET start");
+    console.log ("GET start 1");
+    console.log (app.use("storage"));
+
     model.find({},
         function (err, data) {
             if(err) { console.log(err); return err;}

@@ -14,6 +14,12 @@ class EntityList extends React.Component {
     }
 
     componentDidMount() {
+        this.Read();
+    }
+
+    Create(item){}
+
+    Read (){
         console.log("Start get data:");
         fetch("/api/entities")
             .then(response => response.json())
@@ -28,6 +34,11 @@ class EntityList extends React.Component {
             .catch(err=> {this.setState ({error: err})});
     }
 
+    Update(item) {}
+
+    Delete(item) {}
+
+
     render(){
         if(this.state.error) return this.renderError(); // Если ошибка - вывожу ее
         if(!this.state.isLoaded) return this.renderLoading(); // Загружаюсь
@@ -41,7 +52,7 @@ class EntityList extends React.Component {
                 <div className="row">
                     {
                         this.state.items.map( entity =>
-                            <EntityItem item={entity}></EntityItem>
+                            <EntityItem key={entity._id} item={entity}></EntityItem>
                         )
                     }
                     <EntityItem key={"newElement"} item={null}></EntityItem>
