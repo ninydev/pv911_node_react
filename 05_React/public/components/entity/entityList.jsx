@@ -17,7 +17,25 @@ class EntityList extends React.Component {
         this.Read();
     }
 
-    Create(item){}
+    Create(item){
+        // console.log(item);
+        fetch("/api/entities",
+            {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(item)
+            })
+            .then(response => response.json())
+            .then(item => {
+                const items = this.state.items;
+                items.push(item);
+                this.setState({
+                    isLoaded: true,
+                    items: items
+                });
+            })
+            .catch(err=> {this.setState ({error: err})});
+    }
 
     Read (){
         console.log("Start get data:");
@@ -34,7 +52,26 @@ class EntityList extends React.Component {
             .catch(err=> {this.setState ({error: err})});
     }
 
-    Update(item) {}
+    Update(item) {
+        console.log(item);
+        fetch("/api/entities",
+            {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(item)
+            })
+            .then(response => response.json())
+            .then(item => {
+                const items = this.state.items;
+                items[items.indexOf(el=> el._id == item._id)] = item;
+                //items.push(item);
+                this.setState({
+                    isLoaded: true,
+                    items: items
+                });
+            })
+            .catch(err=> {this.setState ({error: err})});
+    }
 
     Delete(item) {}
 
@@ -52,10 +89,10 @@ class EntityList extends React.Component {
                 <div className="row">
                     {
                         this.state.items.map( entity =>
-                            <EntityItem key={entity._id} item={entity}></EntityItem>
+                            <EntityItem update={this.Update.bind(this)} delete={this.Delete.bind(this)} key={entity._id} item={entity}></EntityItem>
                         )
                     }
-                    <EntityItem key={"newElement"} item={null}></EntityItem>
+                    <EntityItem create={this.Create.bind(this)} key={"newElement"} item={null}></EntityItem>
                 </div>
             </div>
         );

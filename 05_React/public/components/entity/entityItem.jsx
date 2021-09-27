@@ -2,6 +2,7 @@ class EntityItem extends React.Component {
 
     constructor(props) {
         super(props);
+        //this.oldItem = new Object();
         this.state = {
             isLoaded: true,
             isEdit: false,
@@ -31,8 +32,31 @@ class EntityItem extends React.Component {
     openEditForm (){
         this.oldItem = this.state.item;// Схраняю старый элемент (null)
         if ( this.state.item == null) // Если у меня создание нового - то делаю чистый
+        {
             this.state.item = new Object();
+            this.state.item.name = "";
+        }
         this.setState({isEdit: true});
+    }
+
+    cancelEditForm(){
+        //console.
+        this.setState({
+            isEdit: false,
+            item:this.oldItem
+        });
+        delete this.oldItem;
+    }
+
+    saveEditForm(){
+        if (this.props.create)
+            this.props.create(this.state.item);
+        else
+            this.props.update(this.state.item);
+        this.setState({
+            isEdit:false
+        });
+        delete this.oldItem;
     }
 
     renderForm(){
@@ -43,6 +67,8 @@ class EntityItem extends React.Component {
                 <input name="name" type="text"
                        value={this.state.item.name}
                        onChange={this.onChange.bind(this)}/>
+                <input type="button" value="Cancel" onClick={this.cancelEditForm.bind(this)}/>
+                <input type="button" value="Save" onClick={this.saveEditForm.bind(this)}/>
 
             </div>
         </div>
@@ -66,6 +92,7 @@ class EntityItem extends React.Component {
             <div className="card col-3" key={this.state.item._id}>
                 <div className="card-body">
                     {this.state.item.name}
+                    <input type="button" value="edit" onClick={this.openEditForm.bind(this)}/>
                 </div>
             </div>
         );
