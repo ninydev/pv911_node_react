@@ -2,7 +2,6 @@ class EntityItem extends React.Component {
 
     constructor(props) {
         super(props);
-        //this.oldItem = new Object();
         this.state = {
             isLoaded: true,
             isEdit: false,
@@ -28,9 +27,8 @@ class EntityItem extends React.Component {
         return this.renderData();
     }
 
-
     openEditForm (){
-        this.oldItem = this.state.item;// Схраняю старый элемент (null)
+        this.oldItem = JSON.stringify(this.state.item);
         if ( this.state.item == null) // Если у меня создание нового - то делаю чистый
         {
             this.state.item = new Object();
@@ -40,10 +38,9 @@ class EntityItem extends React.Component {
     }
 
     cancelEditForm(){
-        //console.
         this.setState({
             isEdit: false,
-            item:this.oldItem
+            item:JSON.parse(this.oldItem)
         });
         delete this.oldItem;
     }
@@ -63,7 +60,7 @@ class EntityItem extends React.Component {
         return(
         <div className="card col-3" key="CreateNewElement">
             <div className="card-body">
-                <input name="_id" type="hidden" value={this.state.item_id}/>
+                <input name="_id" type="hidden" value={this.state.item._id}/>
                 <input name="name" type="text"
                        value={this.state.item.name}
                        onChange={this.onChange.bind(this)}/>
@@ -97,8 +94,6 @@ class EntityItem extends React.Component {
             </div>
         );
     }
-
-
 
     // Компонент в состоянии загрузки
     renderLoading(){
