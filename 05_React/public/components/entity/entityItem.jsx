@@ -11,7 +11,9 @@ class EntityItem extends React.Component {
     }
 
     onChange (element){
-        this.state[element.target.name] = element.target.value;
+        const item = this.state.item;
+        item[element.target.name] = element.target.value;
+        this.setState({item: item});
     }
 
     componentDidMount() {
@@ -26,7 +28,7 @@ class EntityItem extends React.Component {
     }
 
 
-    changeEdit (){
+    openEditForm (){
         this.oldItem = this.state.item;// Схраняю старый элемент (null)
         if ( this.state.item == null) // Если у меня создание нового - то делаю чистый
             this.state.item = new Object();
@@ -37,7 +39,11 @@ class EntityItem extends React.Component {
         return(
         <div className="card col-3" key="CreateNewElement">
             <div className="card-body">
-                Форма создания элемента
+                <input name="_id" type="hidden" value={this.state.item_id}/>
+                <input name="name" type="text"
+                       value={this.state.item.name}
+                       onChange={this.onChange.bind(this)}/>
+
             </div>
         </div>
         );
@@ -47,7 +53,7 @@ class EntityItem extends React.Component {
     renderNewElement(){
         return (
             <div className="card col-3" key="CreateNewElement">
-                <div className="card-body" onClick={this.changeEdit.bind(this)}>
+                <div className="card-body" onClick={this.openEditForm.bind(this)}>
                     Создать
                 </div>
             </div>
