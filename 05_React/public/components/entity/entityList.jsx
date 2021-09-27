@@ -73,7 +73,26 @@ class EntityList extends React.Component {
             .catch(err=> {this.setState ({error: err})});
     }
 
-    Delete(item) {}
+    Delete(item) {
+        const items = this.state.items;
+        console.log("Delete");
+        console.log(item);
+        items.splice(items.indexOf(el=> el._id == item._id),1)
+        this.setState({
+            isLoaded: true,
+            items: items
+        });
+        fetch("/api/entities",
+            {
+                method: 'DELETE',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(item)
+            })
+            .then(response => {})
+            .then(item => {})
+            .catch(err=> {this.setState ({error: err})});
+
+    }
 
 
     render(){

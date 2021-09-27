@@ -46,10 +46,13 @@ class EntityItem extends React.Component {
     }
 
     saveEditForm(){
-        if (this.props.create)
+        if (this.props.create) {
             this.props.create(this.state.item);
+            this.state.item = null;
+        }
         else
             this.props.update(this.state.item);
+
         this.setState({
             isEdit:false
         });
@@ -83,6 +86,10 @@ class EntityItem extends React.Component {
         );
     }
 
+    delete(){
+        this.props.delete(this.props.item)
+    }
+
     // Вывод основного состояния компонента
     renderData(){
         return (
@@ -90,6 +97,7 @@ class EntityItem extends React.Component {
                 <div className="card-body">
                     {this.state.item.name}
                     <input type="button" value="edit" onClick={this.openEditForm.bind(this)}/>
+                    <input type="button" value="delete" onClick={this.delete.bind(this)} />
                 </div>
             </div>
         );
