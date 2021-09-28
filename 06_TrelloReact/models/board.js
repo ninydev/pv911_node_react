@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const Boards = new Schema({
+const Board = new Schema({
     // TODO: Описать поля в коллекции
         name: String,
     // Показатель что у кого то открыто
@@ -9,4 +9,4 @@ const Boards = new Schema({
     // JS содает объект динамически
     });
 
-module.exports = mongoose.model("Boards", Boards);
+module.exports = mongoose.model("Boards", Board);
