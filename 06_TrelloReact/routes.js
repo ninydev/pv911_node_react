@@ -22,10 +22,10 @@ router.put("/api/column", cColumn.put);
 router.delete("/api/column", cColumn.delete);
 
 const cCard = require("./controllers/cardController");
-router.get("/api/card", Card.get);
-router.post("/api/card", Card.post);
-router.put("/api/card", Card.put);
-router.delete("/api/card", Card.delete);
+router.get("/api/card", cCard.get);
+router.post("/api/card", cCard.post);
+router.put("/api/card", cCard.put);
+router.delete("/api/card", cCard.delete);
 
 const cComment = require("./controllers/commentController");
 router.get("/api/comment", cComment.get);

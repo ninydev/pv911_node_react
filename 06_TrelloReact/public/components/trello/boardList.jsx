@@ -1,4 +1,4 @@
-class BoardStandartList extends React.Component {
+class BoardList extends React.Component {
 
     constructor(props) {
         super(props);
@@ -98,19 +98,22 @@ class BoardStandartList extends React.Component {
     // Вывод основного состояния компонента
     renderData(){
         return (
-            <div className="container">
-                <div className="row">
+            <section className="container">
+                <header className="row">
                     {
                         this.state.items.map( board =>
-                            <BoardStandartItem
+                            <BoardHeaderItem
                                 update={this.Update.bind(this)}
                                 delete={this.Delete.bind(this)}
-                                key={board._id} item={board}></BoardStandartItem>
+                                key={board._id} item={board}></BoardHeaderItem>
                         )
                     }
-                    <BoardStandartItem create={this.Create.bind(this)} key={"newBoardElement"} item={null}></BoardStandartItem>
+                    <BoardHeaderItem create={this.Create.bind(this)} key={"newBoardElement"} item={null}></BoardHeaderItem>
+                </header>
+                <div>
+                    тут будет выдвоиться тело доски
                 </div>
-            </div>
+            </section>
         );
     }
 

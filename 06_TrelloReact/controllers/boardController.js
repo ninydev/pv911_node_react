@@ -1,5 +1,5 @@
 //TODO: покдлючить нужную модель
-const model = require("../models/boards");
+const model = require("../models/board");
 
 // Create => POST
 exports.post = function (req, res) {
