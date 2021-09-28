@@ -14,7 +14,8 @@ exports.post = function (req, res) {
 // Read => GET
 exports.get = function (req, res) {
     console.log ("GET start");
-    model.find({},
+    const {column_id} = req.params;
+    model.find({column_id: column_id},
         function (err, data) {
             if(err) { console.log(err); return err;}
             res.json(data);

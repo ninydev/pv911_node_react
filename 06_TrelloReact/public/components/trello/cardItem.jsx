@@ -1,4 +1,4 @@
-class ColumnItem extends React.Component {
+class CardItem extends React.Component {
 
     constructor(props) {
         super(props);
@@ -77,7 +77,7 @@ class ColumnItem extends React.Component {
         return (
             <div className="card col-3" key="CreateNewElement">
                 <div className="card-body" onClick={this.openEditForm.bind(this)}>
-                    Создать колонку
+                    +
                 </div>
             </div>
         );
@@ -95,11 +95,6 @@ class ColumnItem extends React.Component {
                     {this.state.item.name}
                     <input type="button" value="edit" onClick={this.openEditForm.bind(this)}/>
                     <input type="button" value="delete" onClick={this.delete.bind(this)} />
-                    <hr/>
-                    <CardList
-                        column_id={this.state.item._id}
-                        key={'CardListEl_' + this.state.item._id}/>
-
                 </div>
             </div>
         );
