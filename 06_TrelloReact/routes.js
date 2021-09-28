@@ -16,7 +16,7 @@ router.put("/api/board", cBoard.put);
 router.delete("/api/board", cBoard.delete);
 
 const cColumn = require("./controllers/columnController");
-router.get("/api/column", cColumn.get);
+router.get("/api/column/:board_id", cColumn.get);
 router.post("/api/column", cColumn.post);
 router.put("/api/column", cColumn.put);
 router.delete("/api/column", cColumn.delete);

@@ -13,8 +13,10 @@ exports.post = function (req, res) {
 
 // Read => GET
 exports.get = function (req, res) {
-    console.log ("GET start");
-    model.find({},
+    console.log ("GET columns start: ");
+    const {board_id} = req.params;
+    console.log(board_id);
+    model.find({board_id: board_id},
         function (err, data) {
             if(err) { console.log(err); return err;}
             res.json(data);

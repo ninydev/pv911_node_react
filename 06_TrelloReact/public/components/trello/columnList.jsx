@@ -37,7 +37,7 @@ class ColumnList extends React.Component {
 
     Read (){
         console.log("Start get data:");
-        fetch("/api/column")
+        fetch("/api/column/" + this.props.board_id) // Читать только колонки с открытой доски
             .then(response => response.json())
             .then(data => {
                 console.log("getData:");
