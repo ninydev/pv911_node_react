@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const Entity = new Schema({
+const Columns = new Schema({
     // TODO: Описать поля в коллекции
         name: String,
-        isEdit: Boolean, // Показатель что у кого то открыто
+        board_id: String, // Доска
+    // Показатель что у кого то открыто
     // Описание полей не имеет значения
     // JS содает объект динамически
     });
 
-module.exports = mongoose.model("Entity", Entity);
+module.exports = mongoose.model("Columns", Columns);

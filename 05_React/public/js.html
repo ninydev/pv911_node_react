@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    console.log("Start Fetch");
+    fetch("/api/entitie1s")
+        .then(response => {
+            console.log("Response  1 then");
+            console.log(response);
+            if (response.status != 200){
+                console.log("Some Error");
+            }
+            return response.json();
+        })
+        .then(item => {
+            console.log("2 then");
+            console.log(item);
+        })
+        .catch(err=> {
+            console.log("Error: ");
+            console.log(err);
+        });
+</script>
+</body>
+</html>
