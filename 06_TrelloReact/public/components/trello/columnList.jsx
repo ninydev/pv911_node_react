@@ -1,25 +1,23 @@
-class BoardList extends React.Component {
+class ColumnList extends React.Component {
 
     constructor(props) {
         super(props);
+        //this.props.board_id .. номер доски
         this.state = {
             isLoaded: false,
             error: null,
             items: [],
-            activeBoard_Id: 0 // текущая открытая доска
         };
     }
 
-    changeActive(id){
-        this.setState({activeBoard_Id: id});
-    }
 
     componentDidMount() {
         this.Read();
     }
 
     Create(item){
-        fetch("/api/board",
+        item.board_id = this.props.board_id;
+        fetch("/api/column",
             {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -39,7 +37,7 @@ class BoardList extends React.Component {
 
     Read (){
         console.log("Start get data:");
-        fetch("/api/board")
+        fetch("/api/column")
             .then(response => response.json())
             .then(data => {
                 console.log("getData:");
@@ -53,8 +51,8 @@ class BoardList extends React.Component {
     }
 
     Update(item) {
-        console.log(item);
-        fetch("/api/board",
+        item.board_id = this.props.board_id;
+        fetch("/api/column",
             {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
@@ -82,7 +80,7 @@ class BoardList extends React.Component {
             isLoaded: true,
             items: items
         });
-        fetch("/api/board",
+        fetch("/api/column",
             {
                 method: 'DELETE',
                 headers: {'Content-Type': 'application/json'},
@@ -102,32 +100,18 @@ class BoardList extends React.Component {
 
     // Вывод основного состояния компонента
     renderData(){
-        let columnList = (<div>Выберете доску в меню</div>);
-        if (this.state.activeBoard_Id != 0)
-        {
-            columnList = (
-                <div><ColumnList
-                    board_id={this.state.activeBoard_Id}
-                    key={'boardAciveEl_' + this.state.activeBoard_Id} />
-                </div>
-                );
-        }
         return (
-            <section className="container">
-                <header className="row">
-                    {
-                        this.state.items.map( board =>
-                            <BoardHeaderItem
-                                update={this.Update.bind(this)}
-                                delete={this.Delete.bind(this)}
-                                changeActive = {this.changeActive.bind(this)}
-                                key={'boardHeaderEl_' + board._id} item={board}></BoardHeaderItem>
-                        )
-                    }
-                    <BoardHeaderItem create={this.Create.bind(this)} key={"newBoardElement"} item={null}></BoardHeaderItem>
-                </header>
-                    {columnList}
-            </section>
+            <div>
+                {
+                    this.state.items.map( column =>
+                        <ColumnItem
+                            update={this.Update.bind(this)}
+                            delete={this.Delete.bind(this)}
+                            key={'columnItemEl_' + column._id} item={column}></ColumnItem>
+                    )
+                }
+                <ColumnItem create={this.Create.bind(this)} key={"newColumnElement"} item={null}></ColumnItem>
+            </div>
         );
     }
 

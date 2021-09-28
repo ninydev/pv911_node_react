@@ -1,4 +1,4 @@
-class BoardHeaderItem extends React.Component {
+class ColumnItem extends React.Component {
 
     constructor(props) {
         super(props);
@@ -16,15 +16,9 @@ class BoardHeaderItem extends React.Component {
         this.setState({item: item});
     }
 
-    changeActive(){
-        if (this.props.changeActive){
-            this.props.changeActive(this.state.item._id);
-        }
-    }
-
     render(){
         if(this.state.error) return this.renderError(); // Если ошибка - вывожу ее
-        // if(!this.state.isLoaded) return this.renderLoading(); // Загружаюсь
+        if(!this.state.isLoaded) return this.renderLoading(); // Загружаюсь
         if(this.state.isEdit) return this.renderForm();
         if(this.state.item == null) return this.renderNewElement();
         return this.renderData();
@@ -83,7 +77,7 @@ class BoardHeaderItem extends React.Component {
         return (
             <div className="card col-3" key="CreateNewElement">
                 <div className="card-body" onClick={this.openEditForm.bind(this)}>
-                    Создать
+                    Создать колонку
                 </div>
             </div>
         );
@@ -97,7 +91,7 @@ class BoardHeaderItem extends React.Component {
     renderData(){
         return (
             <div className="card col-3">
-                <div className="card-body" onClick={this.changeActive.bind(this)}>
+                <div className="card-body">
                     {this.state.item.name}
                     <input type="button" value="edit" onClick={this.openEditForm.bind(this)}/>
                     <input type="button" value="delete" onClick={this.delete.bind(this)} />
@@ -111,7 +105,7 @@ class BoardHeaderItem extends React.Component {
         return (
             <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
+                    <span className="sr-only"></span>
                 </div>
             </div>
         )
