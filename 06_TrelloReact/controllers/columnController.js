@@ -1,5 +1,7 @@
 //TODO: покдлючить нужную модель
 const model = require("../models/column");
+const lastUpdate = require("./stateController");
+
 
 // Create => POST
 exports.post = function (req, res) {
@@ -7,6 +9,7 @@ exports.post = function (req, res) {
     const element = new model (req.body);
     element.save (function (err) {
         if(err) { console.log(err); return err;}
+        lastUpdate.set();
         return res.send(element);
     })
 };
@@ -33,6 +36,7 @@ exports.put = function (req, res) {
         {}, // new:true - создаст новый если не нашел по ID
         function (err, result) {
             if (err) {console.log(err); res.send(err);}
+            lastUpdate.set();
             res.send(result);
         }
     );
@@ -45,6 +49,7 @@ exports.delete = function (req, res) {
         {},
         function (err) {
             if (err) res.send(err);
+            lastUpdate.set();
             res.sendStatus(200);
         }
     );

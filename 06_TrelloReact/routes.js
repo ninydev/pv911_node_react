@@ -9,6 +9,10 @@ router.put("/api/entities", cEntity.put);
 router.delete("/api/entities", cEntity.delete);
 */
 
+const cState = require("./controllers/stateController");
+router.get("/api/state", cState.get);
+
+
 const cBoard = require("./controllers/boardController");
 router.get("/api/board", cBoard.get);
 router.post("/api/board", cBoard.post);
