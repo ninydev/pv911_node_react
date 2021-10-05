@@ -14,6 +14,7 @@ import Error404 from "./componets/static/errors/Error404";
 import Header from "./componets/layout/header";
 import Footer from "./componets/layout/footer";
 import BoardList from "./componets/trello/boardList";
+import NpContainer from "./componets/novaposhta/npContainer";
 
 
 
@@ -30,7 +31,7 @@ function App() {
                       <BoardList />
                   </Route>
                   <Route path="/np">
-                      <NovaPoshta />
+                      <NpContainer />
                   </Route>
                   <Route path="*">
                       <Error404 />
