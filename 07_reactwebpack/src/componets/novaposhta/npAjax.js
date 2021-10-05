@@ -1,7 +1,6 @@
-
 export default class NpAjax {
 
-    Get(modelName,calledMethod, methodProperties, callBackOk, callBackErr){
+    static Get(modelName, calledMethod, methodProperties, callBackOk, callBackErr) {
         fetch(
             "https://api.novaposhta.ua/v2.0/json/",
             {
@@ -16,25 +15,25 @@ export default class NpAjax {
             }
         )
             .then(response => {
-                if(response.status != 200){
+                if (response.status != 200) {
                     console.log(response.status);
                     console.log(response.statusText);
-                    if(callBackErr) callBackErr(response.statusText);
+                    if (callBackErr) callBackErr(response.statusText);
                 }
                 return response.json();
             })
             .then(json => {
-                if(json['success']){
+                if (json['success']) {
                     callBackOk(json['data']);
                 } else {
                     console.log(json['errors']);
                     console.log(json['warnings']);
-                    if(callBackErr) callBackErr(json['errors']);
+                    if (callBackErr) callBackErr(json['errors']);
                 }
             })
-            .catch(err=> {
+            .catch(err => {
                 console.log(err);
-                if(callBackErr) callBackErr(err);
+                if (callBackErr) callBackErr(err);
             })
     }
 }

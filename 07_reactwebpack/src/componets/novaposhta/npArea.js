@@ -1,4 +1,5 @@
 import React from "react";
+import NpAjax from "./npAjax";
 
 export default class NpArea extends React.Component {
 
@@ -17,32 +18,35 @@ export default class NpArea extends React.Component {
     }
 
     Get(){
-        fetch(
-            "https://api.novaposhta.ua/v2.0/json/",
-            {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                        "apiKey": "3c81d19dc6c4375bc278f4c329fb03cb",
-                        "modelName": "Address",
-                        "calledMethod": "getAreas",
-                        "methodProperties": {},
+        NpAjax.Get(
+            "Address", "getAreas", {},
+            function (items) {
+                this.setState({
+                        isLoaded: true,
+                        items:items
                     })
-            }
+            }.bind(this),
+            function (err) {
+                this.setState({
+                    isLoaded: false,
+                    error: err
+                })
+            }.bind(this)
         )
-            .then(response => response.json())
-            .then(json => {console.log(json)})
-            .catch(err=> console.log(err))
 
     }
-
-
 
 
     renderData(){
         return (
             <ul>
+                {this.state.items.map(item =>
+                    <li key={item.Ref} >
+                        {item.DescriptionRu}
+                    </li>
 
+
+                )}
             </ul>
         )
     }
