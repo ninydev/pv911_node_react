@@ -1,6 +1,10 @@
 const express = require("express");
 const path = require("path");
+const cors = require("cors");
 const app = express();
+
+// разрешить запросы с других сайтов
+app.use(cors());
 
 // Установить каталог для статических файлов
 app.use(express.static(path.join(__dirname,"public")));
@@ -35,7 +39,7 @@ mongoose.connect( // Соединиться с базой
 
     function (err) { // после соединения обработать результат
         if (err) {console.log(err); return;} // если ошибка - вывести и остановить запуск
-        console.log("http://localhost:3000");
-        app.listen(3000); // если все ок - запустить веб сервер
+        console.log("http://localhost:3030");
+        app.listen(3030); // если все ок - запустить веб сервер
     }
 );
