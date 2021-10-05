@@ -12,6 +12,10 @@ export default class NpArea extends React.Component {
         };
     }
 
+    componentDidMount() {
+        this.Get();
+    }
+
     Get(){
         fetch(
             "https://api.novaposhta.ua/v2.0/json/",
