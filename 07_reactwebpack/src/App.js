@@ -15,6 +15,7 @@ import Header from "./componets/layout/header";
 import Footer from "./componets/layout/footer";
 import BoardList from "./componets/trello/boardList";
 import NpContainer from "./componets/novaposhta/npContainer";
+import Auth from "./componets/auth/Auth";
 
 
 
@@ -22,6 +23,7 @@ function App() {
   return (
       <Router>
           <Header />
+          <Auth></Auth>
           <main>
               <Switch>
                   <Route exact path="/">
