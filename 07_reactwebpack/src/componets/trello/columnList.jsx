@@ -64,7 +64,7 @@ export default class ColumnList extends React.Component {
             .then(response => response.json())
             .then(item => {
                 const items = this.state.items;
-                items[items.indexOf(el=> el._id == item._id)] = item;
+                items[items.indexOf(el=> el._id === item._id)] = item;
                 //items.push(item);
                 this.setState({
                     isLoaded: true,

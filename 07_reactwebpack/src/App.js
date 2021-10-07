@@ -1,14 +1,12 @@
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
 } from "react-router-dom";
 
 
 import './App.css';
 
-import NovaPoshta from "./componets/NovaPoshta";
 import Home from "./componets/static/pages/Home";
 import Error404 from "./componets/static/errors/Error404";
 import Header from "./componets/layout/header";

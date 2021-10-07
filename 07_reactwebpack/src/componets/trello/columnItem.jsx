@@ -31,8 +31,7 @@ export default class ColumnItem extends React.Component {
         this.oldItem = JSON.stringify(this.state.item);
         if ( this.state.item == null) // Если у меня создание нового - то делаю чистый
         {
-            this.state.item = new Object();
-            this.state.item.name = "";
+            this.setState({item: {name:""}});
         }
         this.setState({isEdit: true});
     }
@@ -48,7 +47,7 @@ export default class ColumnItem extends React.Component {
     saveEditForm(){
         if (this.props.create) {
             this.props.create(this.state.item);
-            this.state.item = null;
+            this.setState({item:null});
         }
         else
             this.props.update(this.state.item);

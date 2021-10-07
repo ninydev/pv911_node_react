@@ -67,7 +67,7 @@ export default class BoardList extends React.Component {
             .then(response => response.json())
             .then(item => {
                 const items = this.state.items;
-                items[items.indexOf(el=> el._id == item._id)] = item;
+                items[items.indexOf(el=> el._id === item._id)] = item;
                 //items.push(item);
                 this.setState({
                     isLoaded: true,
@@ -107,7 +107,7 @@ export default class BoardList extends React.Component {
     // Вывод основного состояния компонента
     renderData(){
         let columnList = (<div>Выберете доску в меню</div>);
-        if (this.state.activeBoard_Id != 0)
+        if (this.state.activeBoard_Id !== 0)
         {
             columnList = (
                 <div><ColumnList
