@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
+const cAuth = require("./controllers/auth/authController");
+router.get("/api/auth/checkEmail/:email", cAuth.checkEmail);
+router.post("/api/auth/register", cAuth.register);
+
+
 /*
 const cEntity = require("./controllers/entityController");
 router.get("/api/entities", cEntity.get);
