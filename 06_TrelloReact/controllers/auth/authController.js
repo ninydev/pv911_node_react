@@ -31,4 +31,18 @@ exports.checkEmail = function (request,response) {
         });
 }
 
+exports.tryLogin = function (request,response) {
+    const user = new modelUser (request.body);
+    modelUser.find({email: user.email, password: user.password},
+        function (err, res) {
+            if(err) { console.log(err); return err;}
+            if(res.length > 0) {
+                // Есть такой в базе
+                response.send(res); // так он отправит пользователя
+            } else {
+                // Нет такой пары в базе - отправить ошибку
+            }
+        });
+
+}
 
