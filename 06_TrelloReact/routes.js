@@ -20,7 +20,7 @@ router.get("/api/state", cState.get);
 
 
 const cBoard = require("./controllers/boardController");
-//router.get("/api/board/:session_id", cBoard.get);
+//router.get("/api/board/:session_id/:board_id", cBoard.get);
 router.get("/api/board", cBoard.get);
 router.post("/api/board", cBoard.post);
 router.put("/api/board", cBoard.put);
