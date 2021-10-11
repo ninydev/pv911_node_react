@@ -23,11 +23,17 @@ export default class BoardList extends React.Component {
     }
 
     Create(item){
+        let objToSend = {
+            session_id: window.localStorage.getItem("MySessionId");
+            data: item
+        }
+        //fetch("/api/board/" + window.localStorage.getItem("MySessionId"),
         fetch("/api/board",
             {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(item)
+                //body: JSON.stringify(item)
+                body: JSON.stringify(objToSend)
             })
             .then(response => response.json())
             .then(item => {

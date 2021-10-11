@@ -1,11 +1,34 @@
 //TODO: покдлючить нужную модель
 const model = require("../models/board");
+const session = require("../models/session");
+const user = require("../models/session");
 const lastUpdate = require("./stateController");
 
 // Create => POST
 exports.post = function (req, res) {
     console.log ("POST start");
-    const element = new model (req.body);
+
+    let session_id = req.body.session_id;
+    session.findOne({
+        _id: session_id
+    },function (err, data) {
+        if (err) {console.log(err); res.send(err);}
+        user.findOne({
+            _id: data.user_id
+        }, function (err, data) {
+            if (err) {console.log(err); res.send(err);}
+            if(data.roles.includes("ADMIN_ROLE")) {
+                // Операции
+            } else {
+                res.setStatus(403);
+            }
+        })
+    })
+
+
+    const element = new model (req.body.data);
+
+    //const element = new model (req.body);
     element.save (function (err) {
         if(err) { console.log(err); return err;}
         lastUpdate.set();

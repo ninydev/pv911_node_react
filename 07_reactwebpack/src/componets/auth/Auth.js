@@ -107,6 +107,9 @@ export default class Auth extends React.Component {
             })
             .then(json => {
                 console.log(json);
+                window.localStorage.setItem("MySessionId", json);
+                // window.localStorage.removeItem("MySessionId");
+
             })
             .catch(err => {
                 console.log(err);
