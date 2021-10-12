@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "removeComments": true,
+    "sourceMap": true,
+    "outFile": "./site.js"
+  },
+    "files": ["app.ts","my.ts"],
+    "exclude": [
+    "node_modules"
+  ]
+}
